@@ -1,0 +1,60 @@
+# Query: 
+# ContextLines: 1
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <h1>Register Here</h1>
+    <form id="registrationForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required><br><br>
+        
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone" required><br><br>
+        
+        <label for="lineId">Line ID:</label><br>
+        <input type="text" id="lineId" name="lineId" required><br><br>
+        
+        <label for="tAndC">Terms and Conditions:</label><br>
+        <textarea id="tAndC" readonly rows="4">
+            By registering, you agree to our terms and conditions.
+        </textarea><br><br>
+        
+        <label>
+            <input type="checkbox" id="accept" name="accept" required>
+            I accept the Terms and Conditions.
+        </label><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            // Send data to Google Apps Script
+            const response = await fetch("https://script.google.com/macros/s/AKfycbyX8-CF53lIklRmxNEjbjmKc_y-zYStNznFd6e6VUSSQCflBQ6vtPiFfcOxxVHNODdz/exec
+        ", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                alert("Registration successful!");
+                e.target.reset();
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
